@@ -22,33 +22,13 @@
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 32px;
+      margin-bottom: 30px;
     }
 
     .brand {
       font-weight: 800;
       font-size: 18px;
       color: #0b5d56;
-    }
-
-    .powered-badge {
-      background: #ffffff;
-      border: 1px solid #dbe4f0;
-      border-radius: 999px;
-      padding: 12px 22px;
-      font-size: 18px;
-      font-weight: 800;
-      color: #4b5563;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-    }
-
-    .powered-badge a {
-      color: #5b4df5;
-      text-decoration: none;
-      font-weight: 900;
     }
 
     .tag {
@@ -136,6 +116,55 @@
     .panel h2 {
       font-size: 19px;
       margin-bottom: 18px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .panel-header h2 {
+      margin-bottom: 0;
+    }
+
+    .nudge-lockup {
+      text-decoration: none;
+      text-align: right;
+      color: #4b5563;
+      background: #ffffff;
+      border: 1px solid #dbe4f0;
+      border-radius: 16px;
+      padding: 10px 14px;
+      min-width: 150px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+    }
+
+    .nudge-lockup span {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #6b7280;
+      line-height: 1;
+    }
+
+    .nudge-lockup strong {
+      display: block;
+      font-size: 22px;
+      font-weight: 900;
+      color: #5b4df5;
+      line-height: 1.1;
+      margin-top: 3px;
+    }
+
+    .nudge-lockup small {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      color: #6b7280;
+      margin-top: 2px;
     }
 
     .journey-list {
@@ -255,10 +284,11 @@
 
     @media (max-width: 900px) {
       .page { padding: 28px 20px 90px; }
-      header { align-items: flex-start; gap: 12px; flex-direction: column; }
       h1 { font-size: 36px; }
       .focus-title { font-size: 24px; }
       .grid { grid-template-columns: 1fr; max-width: 100%; }
+      .panel-header { flex-direction: column; }
+      .nudge-lockup { text-align: left; }
     }
   </style>
 </head>
@@ -267,9 +297,6 @@
   <main class="page">
     <header>
       <div class="brand">Heritage Dining Group <span style="color:#9ca3af;">(Demo)</span></div>
-      <div class="powered-badge">
-        Powered by <a href="https://nudge.ricetech.app/" target="_blank">Nudge</a>
-      </div>
     </header>
 
     <section>
@@ -283,10 +310,10 @@
     </section>
 
     <section class="focus-box" id="focusBox">
-      <div class="focus-kicker" id="focusKicker">Current Focus</div>
+      <div class="focus-kicker">Current Focus</div>
       <div class="focus-title" id="focusTitle">Sarah’s First Day Journey</div>
       <div class="focus-desc" id="focusDesc">
-        Start the demo by opening the chat icon at the bottom-right. Each step will highlight what the audience should observe.
+        Open the chat icon at the bottom-right. Each step will highlight what the audience should observe.
       </div>
     </section>
 
@@ -306,7 +333,15 @@
       </div>
 
       <div class="panel">
-        <h2>Demo Controls</h2>
+        <div class="panel-header">
+          <h2>Demo Controls</h2>
+
+          <a class="nudge-lockup" href="https://nudge.ricetech.app/" target="_blank">
+            <span>Powered by</span>
+            <strong>Nudge</strong>
+            <small>Enterprise AI Platform</small>
+          </a>
+        </div>
 
         <div class="prompt-list">
           <div class="prompt-card active" id="card-1">
@@ -375,11 +410,11 @@
     const focusData = {
       1: {
         title: "First Day Onboarding",
-        desc: "Sarah does not need to know who to ask or where to begin. The AI immediately guides her through her first-day priorities."
+        desc: "Sarah does not need to know who to ask or where to begin. The AI guides her through her first-day priorities."
       },
       2: {
         title: "Workplace Knowledge Becomes Learning",
-        desc: "Instead of opening an SOP or LMS, Sarah simply describes what she wants to learn. The AI turns workplace knowledge into a guided learning conversation."
+        desc: "Sarah simply describes what she wants to learn. The AI turns workplace knowledge into a guided learning conversation."
       },
       3: {
         title: "Learning Through Clarification",
@@ -387,7 +422,7 @@
       },
       4: {
         title: "Learning in the Flow of Work",
-        desc: "Sarah interrupts the learning to ask a workplace question. Observe how the AI supports the employee journey beyond formal training."
+        desc: "Sarah interrupts the learning to ask a workplace question. The AI supports the employee journey beyond formal training."
       },
       5: {
         title: "Continuous Conversation",
@@ -395,11 +430,11 @@
       },
       6: {
         title: "Safe Practice Before Real Work",
-        desc: "The AI shifts from explaining to role-play. Sarah can practise a customer complaint scenario before facing a real customer."
+        desc: "The AI shifts from explaining to role-play. Sarah practises a customer complaint scenario before facing a real customer."
       },
       7: {
         title: "Coaching, Not Just Answers",
-        desc: "The AI reviews Sarah’s response, recognises what she did well and suggests improvements. This turns learning into performance support."
+        desc: "The AI reviews Sarah’s response, recognises what she did well and suggests improvements before real work begins."
       }
     };
 
