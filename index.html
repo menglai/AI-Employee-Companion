@@ -16,20 +16,20 @@
     }
 
     .page {
-      max-width: 1120px;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 40px 48px 80px;
+      padding: 36px 44px 80px;
     }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
     }
 
     .brand {
-      font-weight: 700;
+      font-weight: 800;
       font-size: 18px;
       color: #0b5d56;
     }
@@ -38,17 +38,17 @@
       background: #ffffff;
       border: 1px solid #dbe4f0;
       border-radius: 999px;
-      padding: 10px 18px;
-      font-size: 17px;
-      font-weight: 700;
+      padding: 12px 22px;
+      font-size: 18px;
+      font-weight: 800;
       color: #4b5563;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
     }
 
     .powered-badge a {
       color: #5b4df5;
       text-decoration: none;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     .tag {
@@ -57,31 +57,64 @@
       border-radius: 999px;
       background: #e6f4ea;
       color: #0b6b38;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 14px;
       margin-bottom: 18px;
     }
 
     h1 {
-      font-size: 46px;
+      font-size: 48px;
       line-height: 1.1;
       margin-bottom: 14px;
       letter-spacing: -1px;
     }
 
     .subtitle {
-      font-size: 21px;
+      font-size: 22px;
       color: #00695c;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 12px;
     }
 
     .desc {
       font-size: 18px;
       line-height: 1.6;
-      max-width: 760px;
+      max-width: 820px;
       color: #4b5563;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
+    }
+
+    .focus-box {
+      max-width: 980px;
+      background: linear-gradient(135deg, #172033, #0b5d56);
+      color: white;
+      border-radius: 24px;
+      padding: 26px 30px;
+      margin-bottom: 28px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+      transition: all 0.25s ease;
+    }
+
+    .focus-kicker {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #a7f3d0;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .focus-title {
+      font-size: 30px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .focus-desc {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #e5f6f2;
+      max-width: 780px;
     }
 
     .grid {
@@ -89,7 +122,7 @@
       grid-template-columns: 320px minmax(0, 1fr);
       gap: 28px;
       align-items: start;
-      max-width: 900px;
+      max-width: 980px;
     }
 
     .panel {
@@ -116,6 +149,17 @@
       align-items: flex-start;
       font-size: 15px;
       line-height: 1.35;
+      opacity: 0.55;
+      transition: all 0.2s ease;
+    }
+
+    .journey-item.active {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    .journey-item.done {
+      opacity: 0.85;
     }
 
     .num {
@@ -128,8 +172,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 14px;
+    }
+
+    .journey-item.active .num {
+      background: #5b4df5;
+      color: white;
+    }
+
+    .journey-item.done .num {
+      background: #dcfce7;
+      color: #166534;
     }
 
     .prompt-list {
@@ -146,11 +200,18 @@
       grid-template-columns: 1fr auto;
       gap: 12px;
       align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .prompt-card.active {
+      border-color: #5b4df5;
+      box-shadow: 0 0 0 3px rgba(91, 77, 245, 0.12);
+      background: #ffffff;
     }
 
     .prompt-title {
       font-size: 15px;
-      font-weight: 800;
+      font-weight: 900;
       color: #172033;
     }
 
@@ -165,9 +226,9 @@
       border-radius: 10px;
       background: #5b4df5;
       color: white;
-      padding: 9px 13px;
+      padding: 10px 15px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       white-space: nowrap;
     }
@@ -196,6 +257,7 @@
       .page { padding: 28px 20px 90px; }
       header { align-items: flex-start; gap: 12px; flex-direction: column; }
       h1 { font-size: 36px; }
+      .focus-title { font-size: 24px; }
       .grid { grid-template-columns: 1fr; max-width: 100%; }
     }
   </style>
@@ -220,79 +282,87 @@
       </p>
     </section>
 
+    <section class="focus-box" id="focusBox">
+      <div class="focus-kicker" id="focusKicker">Current Focus</div>
+      <div class="focus-title" id="focusTitle">Sarah’s First Day Journey</div>
+      <div class="focus-desc" id="focusDesc">
+        Start the demo by opening the chat icon at the bottom-right. Each step will highlight what the audience should observe.
+      </div>
+    </section>
+
     <section class="grid">
       <div class="panel">
         <h2>Sarah’s Journey</h2>
 
         <div class="journey-list">
-          <div class="journey-item"><div class="num">1</div><div><strong>First Day</strong><br>Start onboarding.</div></div>
-          <div class="journey-item"><div class="num">2</div><div><strong>Learning</strong><br>Begin complaint handling.</div></div>
-          <div class="journey-item"><div class="num">3</div><div><strong>Clarify</strong><br>Ask for an example.</div></div>
-          <div class="journey-item"><div class="num">4</div><div><strong>Interrupt</strong><br>Ask a workplace question.</div></div>
-          <div class="journey-item"><div class="num">5</div><div><strong>Resume</strong><br>Continue learning.</div></div>
-          <div class="journey-item"><div class="num">6</div><div><strong>Practise</strong><br>Handle a complaint.</div></div>
-          <div class="journey-item"><div class="num">7</div><div><strong>Coaching</strong><br>Receive feedback.</div></div>
+          <div class="journey-item active" id="journey-1"><div class="num">1</div><div><strong>First Day</strong><br>Start onboarding.</div></div>
+          <div class="journey-item" id="journey-2"><div class="num">2</div><div><strong>Learning</strong><br>Begin complaint handling.</div></div>
+          <div class="journey-item" id="journey-3"><div class="num">3</div><div><strong>Clarify</strong><br>Ask for an example.</div></div>
+          <div class="journey-item" id="journey-4"><div class="num">4</div><div><strong>Interrupt</strong><br>Ask a workplace question.</div></div>
+          <div class="journey-item" id="journey-5"><div class="num">5</div><div><strong>Resume</strong><br>Continue learning.</div></div>
+          <div class="journey-item" id="journey-6"><div class="num">6</div><div><strong>Practise</strong><br>Handle a complaint.</div></div>
+          <div class="journey-item" id="journey-7"><div class="num">7</div><div><strong>Coaching</strong><br>Receive feedback.</div></div>
         </div>
       </div>
 
       <div class="panel">
-        <h2>Demo Prompt Controls</h2>
+        <h2>Demo Controls</h2>
 
         <div class="prompt-list">
-          <div class="prompt-card">
+          <div class="prompt-card active" id="card-1">
             <div>
-              <div class="prompt-title">Prompt 1: First Day</div>
-              <div class="prompt-sub">Start Sarah’s onboarding journey</div>
+              <div class="prompt-title">Step 1: First Day</div>
+              <div class="prompt-sub">Observe how AI reduces Day 1 uncertainty</div>
             </div>
-            <button onclick="copyPrompt(event, 'Hi! Today is my first day.')">Copy</button>
+            <button data-step="1" data-prompt="Hi! Today is my first day.">Copy</button>
           </div>
 
-          <div class="prompt-card">
+          <div class="prompt-card" id="card-2">
             <div>
-              <div class="prompt-title">Prompt 2: Start Learning</div>
-              <div class="prompt-sub">Move into complaint handling learning</div>
+              <div class="prompt-title">Step 2: Start Learning</div>
+              <div class="prompt-sub">Observe how workplace knowledge becomes learning</div>
             </div>
-            <button onclick="copyPrompt(event, 'I\\'d like to learn how to handle customer complaints.')">Copy</button>
+            <button data-step="2" data-prompt="I'd like to learn how to handle customer complaints.">Copy</button>
           </div>
 
-          <div class="prompt-card">
+          <div class="prompt-card" id="card-3">
             <div>
-              <div class="prompt-title">Prompt 3: Clarify</div>
-              <div class="prompt-sub">Ask for empathy explanation</div>
+              <div class="prompt-title">Step 3: Clarify</div>
+              <div class="prompt-sub">Observe how Sarah asks for help naturally</div>
             </div>
-            <button onclick="copyPrompt(event, 'I don\\'t quite understand empathy. Can you explain it with an example?')">Copy</button>
+            <button data-step="3" data-prompt="I don't quite understand empathy. Can you explain it with an example?">Copy</button>
           </div>
 
-          <div class="prompt-card">
+          <div class="prompt-card" id="card-4">
             <div>
-              <div class="prompt-title">Prompt 4: Interruption</div>
-              <div class="prompt-sub">Switch to workplace buddy support</div>
+              <div class="prompt-title">Step 4: Workplace Interruption</div>
+              <div class="prompt-sub">Observe learning in the flow of work</div>
             </div>
-            <button onclick="copyPrompt(event, 'Yes, that makes sense. Actually, where can I have lunch?')">Copy</button>
+            <button data-step="4" data-prompt="Yes, that makes sense. Actually, where can I have lunch?">Copy</button>
           </div>
 
-          <div class="prompt-card">
+          <div class="prompt-card" id="card-5">
             <div>
-              <div class="prompt-title">Prompt 5: Resume</div>
-              <div class="prompt-sub">Return to learning conversation</div>
+              <div class="prompt-title">Step 5: Resume Learning</div>
+              <div class="prompt-sub">Observe how the learning journey continues</div>
             </div>
-            <button onclick="copyPrompt(event, 'I\\'m back! Can we continue learning about handling customer complaints?')">Copy</button>
+            <button data-step="5" data-prompt="I'm back! Can we continue learning about handling customer complaints?">Copy</button>
           </div>
 
-          <div class="prompt-card">
+          <div class="prompt-card" id="card-6">
             <div>
-              <div class="prompt-title">Prompt 6: Practise</div>
-              <div class="prompt-sub">Start customer complaint scenario</div>
+              <div class="prompt-title">Step 6: Guided Practice</div>
+              <div class="prompt-sub">Observe how AI creates safe practice</div>
             </div>
-            <button onclick="copyPrompt(event, 'Let\\'s practise handling a customer complaint.')">Copy</button>
+            <button data-step="6" data-prompt="Let's practise handling a customer complaint.">Copy</button>
           </div>
 
-          <div class="prompt-card">
+          <div class="prompt-card" id="card-7">
             <div>
-              <div class="prompt-title">Prompt 7: Sarah’s Response</div>
-              <div class="prompt-sub">Trigger AI coaching and feedback</div>
+              <div class="prompt-title">Step 7: Coaching</div>
+              <div class="prompt-sub">Observe how AI gives feedback before real work</div>
             </div>
-            <button onclick="copyPrompt(event, 'I\\'m sorry your steak wasn\\'t cooked as expected. Please give me a moment while I check with the kitchen and see how we can resolve this for you.')">Copy</button>
+            <button data-step="7" data-prompt="I'm sorry your steak wasn't cooked as expected. Please give me a moment while I check with the kitchen and see how we can resolve this for you.">Copy</button>
           </div>
         </div>
       </div>
@@ -302,41 +372,91 @@
   <div class="toast" id="toast">Prompt copied</div>
 
   <script>
-    function copyPrompt(event, text) {
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
+    const focusData = {
+      1: {
+        title: "First Day Onboarding",
+        desc: "Sarah does not need to know who to ask or where to begin. The AI immediately guides her through her first-day priorities."
+      },
+      2: {
+        title: "Workplace Knowledge Becomes Learning",
+        desc: "Instead of opening an SOP or LMS, Sarah simply describes what she wants to learn. The AI turns workplace knowledge into a guided learning conversation."
+      },
+      3: {
+        title: "Learning Through Clarification",
+        desc: "Sarah asks for help in her own words. The AI explains empathy with a workplace example instead of asking her to reread a document."
+      },
+      4: {
+        title: "Learning in the Flow of Work",
+        desc: "Sarah interrupts the learning to ask a workplace question. Observe how the AI supports the employee journey beyond formal training."
+      },
+      5: {
+        title: "Continuous Conversation",
+        desc: "Sarah returns to the learning topic without restarting. The AI continues the journey and keeps the experience connected."
+      },
+      6: {
+        title: "Safe Practice Before Real Work",
+        desc: "The AI shifts from explaining to role-play. Sarah can practise a customer complaint scenario before facing a real customer."
+      },
+      7: {
+        title: "Coaching, Not Just Answers",
+        desc: "The AI reviews Sarah’s response, recognises what she did well and suggests improvements. This turns learning into performance support."
       }
+    };
 
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(showToast);
-      } else {
-        const textArea = document.createElement("textarea");
-        textArea.value = text;
-        textArea.style.position = "fixed";
-        textArea.style.left = "-9999px";
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
+    function updateFocus(step) {
+      document.getElementById("focusTitle").textContent = focusData[step].title;
+      document.getElementById("focusDesc").textContent = focusData[step].desc;
 
-        try {
-          document.execCommand("copy");
-          showToast();
-        } catch (err) {
-          alert("Copy failed. Please copy manually.");
+      for (let i = 1; i <= 7; i++) {
+        const journey = document.getElementById("journey-" + i);
+        const card = document.getElementById("card-" + i);
+
+        journey.classList.remove("active", "done");
+        card.classList.remove("active");
+
+        if (i < step) journey.classList.add("done");
+        if (i === step) {
+          journey.classList.add("active");
+          card.classList.add("active");
         }
-
-        document.body.removeChild(textArea);
       }
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      return Promise.resolve();
     }
 
     function showToast() {
       const toast = document.getElementById("toast");
       toast.classList.add("show");
-      setTimeout(function () {
-        toast.classList.remove("show");
-      }, 1200);
+      setTimeout(() => toast.classList.remove("show"), 1200);
     }
+
+    document.querySelectorAll("button[data-prompt]").forEach((button) => {
+      button.addEventListener("click", function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const step = Number(this.dataset.step);
+        const prompt = this.dataset.prompt;
+
+        updateFocus(step);
+        copyToClipboard(prompt).then(showToast);
+      });
+    });
   </script>
 
   <script
