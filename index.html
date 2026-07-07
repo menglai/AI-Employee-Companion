@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Employee Companion Demo</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 48px 80px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 18px;
+      color: #0b5d56;
+    }
+
+    .powered {
+      font-size: 14px;
+      color: #5f6b7a;
+    }
+
+    .powered a {
+      color: #5b4df5;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .hero {
+      margin-bottom: 34px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: #e6f4ea;
+      color: #0b6b38;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: 46px;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      font-size: 22px;
+      color: #00695c;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .desc {
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 720px;
+      color: #4b5563;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+      max-width: 900px;
+    }
+
+    .panel {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5eaf2;
+    }
+
+    .panel h2 {
+      font-size: 19px;
+      margin-bottom: 18px;
+    }
+
+    .journey-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .journey-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .num {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      border-radius: 50%;
+      background: #e9f3ff;
+      color: #1769aa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .prompt-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .prompt-card {
+      background: #f7f9fc;
+      border: 1px solid #e4e9f2;
+      border-radius: 14px;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .prompt-label {
+      font-size: 13px;
+      color: #6b7280;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .prompt-text {
+      font-size: 15px;
+      color: #172033;
+      line-height: 1.35;
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      background: #5b4df5;
+      color: white;
+      padding: 9px 13px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #493ad8;
+    }
+
+    .observe {
+      margin-top: 24px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: #eef7ff;
+      border: 1px solid #cfe8ff;
+      max-width: 900px;
+    }
+
+    .observe h3 {
+      margin-bottom: 10px;
+      font-size: 17px;
+    }
+
+    .observe ul {
+      padding-left: 20px;
+      color: #374151;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .instruction {
+      margin-top: 24px;
+      color: #4b5563;
+      font-size: 15px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      background: #172033;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        padding: 28px 20px 90px;
+      }
+
+      header {
+        align-items: flex-start;
+        gap: 8px;
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
+
+      .desc {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header>
+      <div class="brand">Heritage Dining Group <span style="color:#9ca3af;">(Demo)</span></div>
+      <div class="powered">Powered by <a href="https://nudge.ricetech.app/" target="_blank">Nudge</a></div>
+    </header>
+
+    <section class="hero">
+      <div class="tag">AI Employee Companion</div>
+      <h1>AI Employee Companion Demonstration</h1>
+      <div class="subtitle">Supporting onboarding, workplace learning and coaching.</div>
+      <p class="desc">
+        Follow Sarah’s first-day journey through one continuous conversation —
+        from onboarding, to learning, to workplace questions, to guided practice.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Sarah’s Demo Journey</h2>
+
+        <div class="journey-list">
+          <div class="journey-item"><div class="num">1</div><div><strong>First Day</strong><br>Sarah asks what to do first.</div></div>
+          <div class="journey-item"><div class="num">2</div><div><strong>Learning</strong><br>She starts complaint handling learning.</div></div>
+          <div class="journey-item"><div class="num">3</div><div><strong>Clarify</strong><br>She asks for empathy to be explained.</div></div>
+          <div class="journey-item"><div class="num">4</div><div><strong>Interrupt</strong><br>She asks a workplace question.</div></div>
+          <div class="journey-item"><div class="num">5</div><div><strong>Resume</strong><br>She continues learning naturally.</div></div>
+          <div class="journey-item"><div class="num">6</div><div><strong>Practise</strong><br>She handles a customer complaint scenario.</div></div>
+          <div class="journey-item"><div class="num">7</div><div><strong>Coaching</strong><br>The AI gives feedback before real work.</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Demo Prompts</h2>
+
+        <div class="prompt-list">
+          <div class="prompt-card">
+            <div>
+              <div class="prompt-label">1. First Day</div>
+              <div class="prompt-text">Hi! Today is my first day.</div>
+            </div>
+            <button onclick="copyPrompt('Hi! Today is my first day.')">Copy</button>
+          </div>
+
+          <div class="prompt-card">
+            <div>
+              <div class="prompt-label">2. Start Learning</div>
+              <div class="prompt-text">I'd like to learn how to handle customer complaints.</div>
+            </div>
+            <button onclick="copyPrompt('I\\'d like to learn how to handle customer complaints.')">Copy</button>
+          </div>
+
+          <div class="prompt-card">
+            <div>
+              <div class="prompt-label">3. Clarification</div>
+              <div class="prompt-text">I don't quite understand empathy. Can you explain it with an example?</div>
+            </div>
+            <button onclick="copyPrompt('I don\\'t quite understand empathy. Can you explain it with an example?')">Copy</button>
+          </div>
+
+          <div class="prompt-card">
+            <div>
+              <div class="prompt-label">4. Workplace Interruption</div>
+              <div class="prompt-text">Yes, that makes sense. Actually, where can I have lunch?</div>
+            </div>
+            <button onclick="copyPrompt('Yes, that makes sense. Actually, where can I have lunch?')">Copy</button>
+          </div>
+
+          <div class="prompt-card">
+            <div>
+              <div class="prompt-label">5. Resume Learning</div>
+              <div class="prompt-text">I'm back! Can we continue learning about handling customer complaints?</div>
+            </div>
+            <button onclick="copyPrompt('I\\'m back! Can we continue learning about handling customer complaints?')">Copy</button>
+          </div>
+
+          <div class="prompt-card">
+            <div>
+              <div class="prompt-label">6. Guided Practice</div>
+              <div class="prompt-text">Let's practise handling a customer complaint.</div>
+            </div>
+            <button onclick="copyPrompt('Let\\'s practise handling a customer complaint.')">Copy</button>
+          </div>
+
+          <div class="prompt-card">
+            <div>
+              <div class="prompt-label">7. Sarah's Response</div>
+              <div class="prompt-text">I'm sorry your steak wasn't cooked as expected. Please give me a moment while I check with the kitchen and see how we can resolve this for you.</div>
+            </div>
+            <button onclick="copyPrompt('I\\'m sorry your steak wasn\\'t cooked as expected. Please give me a moment while I check with the kitchen and see how we can resolve this for you.')">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="observe">
+      <h3>What to Observe</h3>
+      <ul>
+        <li>One continuous conversation across onboarding, learning and workplace support.</li>
+        <li>Existing workplace knowledge becomes conversational learning.</li>
+        <li>Sarah can interrupt, resume and practise naturally.</li>
+        <li>The AI coaches rather than simply giving answers.</li>
+      </ul>
+    </section>
+
+    <p class="instruction">
+      Click the chat icon at the bottom-right to begin. Use the copy buttons above, then paste the prompt into the chat.
+    </p>
+  </main>
+
+  <div class="toast" id="toast">Prompt copied</div>
+
+  <script>
+    function copyPrompt(text) {
+      navigator.clipboard.writeText(text).then(function () {
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(function () {
+          toast.classList.remove("show");
+        }, 1400);
+      });
+    }
+  </script>
+
+  <script
+    src="https://assistant.ricetech.app/widget/widget.js"
+    data-chatbot-id="widget_YOor_YYNkRmb7oF_"
+    data-api-url="https://demo.assistant.ricetech.app">
+  </script>
+</body>
+</html>
