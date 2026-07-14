@@ -744,27 +744,33 @@ const journeyMoments = [
     stageTitle: "Guided Practice",
     momentLabel: "Sarah says:",
     visibleMessage: "Let's practise a wrong order complaint.",
-    hiddenPrompt: "Let's practise a wrong order complaint. I'll respond first.",
-    notices: [
-        "The AI creates a realistic practice scenario.",
-        "Sarah practises before serving a real customer.",
-        "Learning becomes application."
-    ]
-},
+    hiddenPrompt: `Let's practise a wrong order complaint.
 
-{
+Customer:
+"I ordered the grilled salmon, but I received fish and chips."
+
+My response:
+
+"I'm sorry you've received the wrong order.
+I understand how frustrating that must be.
+Let me check your order and arrange the correct meal as soon as possible."`,
+    notices: [
+        "Sarah practises before facing a real customer.",
+        "The AI evaluates a realistic workplace response.",
+        "Learning moves from understanding to application."
+    ]
+},{
     shortTitle: "Coaching",
     stageTitle: "Coaching",
-    momentLabel: "Sarah says:",
-    visibleMessage: "Can you give me feedback on my response?",
-    hiddenPrompt: "Can you give me feedback on my response?",
+    momentLabel: "Sarah asks:",
+    visibleMessage: "Can you coach me on my response?",
+    hiddenPrompt: "Can you coach me on my response?",
     notices: [
-        "The AI becomes Sarah's coach.",
-        "Immediate feedback after practice.",
-        "Confidence grows through coaching."
+        "The AI recognises strengths.",
+        "The AI suggests improvements.",
+        "Learning continues through coaching."
     ]
 }
-
 ];
     let currentIndex = -1;
     let statusTimer = null;
